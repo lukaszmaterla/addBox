@@ -41,6 +41,7 @@ class OfferController extends Controller
      */
     public function newAction(Request $request)
     {
+        $user = $this->getUser();
         $userId = $this->getUser()->getId();
 
         $offer = new Offer();
@@ -49,16 +50,18 @@ class OfferController extends Controller
 
         if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();
-
+            $offer->setUser($user);
+            $offer->setExpiredAt(new \DateTime());
             $em->persist($offer);
             $em->flush();
 
-            return $this->redirectToRoute('offer_show', array('id' => $offer->getId()));
+            return $this->redirectToRoute('offer_show', array('id' => $offer->getId(),'user'=> $user));
         }
 
         return $this->render('offer/new.html.twig', array(
             'offer' => $offer,
             'form' => $form->createView(),
+
         ));
     }
 
@@ -67,14 +70,18 @@ class OfferController extends Controller
      *
      * @Route("/{id}", name="offer_show")
      * @Method("GET")
+     *
      */
     public function showAction(Offer $offer)
     {
         $deleteForm = $this->createDeleteForm($offer);
+        $userId= $offer->getUser();
+        $user = $this->getDoctrine()->getRepository('AppBundle:User')->find($userId);
 
         return $this->render('offer/show.html.twig', array(
             'offer' => $offer,
             'delete_form' => $deleteForm->createView(),
+            'user'=> $user
         ));
     }
 
@@ -83,6 +90,7 @@ class OfferController extends Controller
      *
      * @Route("/{id}/edit", name="offer_edit")
      * @Method({"GET", "POST"})
+     * @Security("has_role('ROLE_USER')")
      */
     public function editAction(Request $request, Offer $offer)
     {
@@ -108,6 +116,7 @@ class OfferController extends Controller
      *
      * @Route("/{id}", name="offer_delete")
      * @Method("DELETE")
+     * @Security("has_role('ROLE_USER')")
      */
     public function deleteAction(Request $request, Offer $offer)
     {

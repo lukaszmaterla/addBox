@@ -10,7 +10,9 @@
     <body>
 
         <div class="container">
-        {% block body %}{% endblock %}
+        {% block body %}
+            {{ render(controller('AppBundle:Offer:index')) }}
+        {% endblock %}
         </div>
         {% block javascripts %}{% endblock %}
     </body>

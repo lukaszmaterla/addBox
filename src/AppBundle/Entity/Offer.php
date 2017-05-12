@@ -45,7 +45,7 @@ class Offer
     /**
      * @var
      * @ORM\ManyToOne(targetEntity="AppBundle\Entity\User", inversedBy="offers")
-     * @ORM\JoinColumn(name="offer_id", referencedColumnName="id")
+     * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
      */
     private $user;
     /**
