@@ -1,0 +1,38 @@
+<?php
+/**
+ * Created by PhpStorm.
+ * User: lukasz
+ * Date: 12.05.17
+ * Time: 09:52
+ */
+
+namespace AppBundle\Entity;
+
+use FOS\UserBundle\Model\User as BaseUser;
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * @ORM\Entity
+ * @ORM\Table(name="fos_user")
+ */
+
+class User extends BaseUser
+{
+    /**
+     * @ORM\Id
+     * @ORM\Column(type="integer")
+     * @ORM\GeneratedValue(strategy="AUTO")
+     */
+    protected $id;
+    /**
+     * @var
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Offer", mappedBy="user")
+     *
+     */
+    private $offers;
+
+    public function __construct()
+    {
+        parent::__construct();
+    }
+}
