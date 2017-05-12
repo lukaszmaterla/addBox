@@ -79,3 +79,5 @@ easy_admin:
     entities:
         User:
             class: AppBundle\Entity\User
+        Offer:
+            class: AppBundle\Entity\Offer
