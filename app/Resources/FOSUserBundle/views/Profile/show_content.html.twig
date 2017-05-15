@@ -3,5 +3,8 @@
 <div class="fos_user_user_show">
     <p>{{ 'profile.show.username'|trans }}: {{ user.username }}</p>
     <p>{{ 'profile.show.email'|trans }}: {{ user.email }}</p>
-    <p><a href="{{ path('offer_new') }}">Dodaj nową ofertę</a></p>
+    <p><a href="{{ path('offer_new') }}">Add new offer</a></p>
+</div>
+<div class="box-success">
+    <a href="{{ path('app_useroffer_showbyuser') }}">Show my offers</a>
 </div>
