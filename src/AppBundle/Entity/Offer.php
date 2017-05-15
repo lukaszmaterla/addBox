@@ -48,6 +48,14 @@ class Offer
      * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
      */
     private $user;
+
+    /**
+     * @var
+     * Many Offers have One Category.
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Category", inversedBy="offers")
+     * @ORM\JoinColumn(name="category_id", referencedColumnName="id", nullable=true)
+     */
+    private $category;
     /**
      * Get id
      *
@@ -148,5 +156,29 @@ class Offer
     public function getUser()
     {
         return $this->user;
+    }
+
+
+    /**
+     * Set category
+     *
+     * @param \AppBundle\Entity\Category $category
+     * @return Offer
+     */
+    public function setCategory(\AppBundle\Entity\Category $category = null)
+    {
+        $this->category = $category;
+
+        return $this;
+    }
+
+    /**
+     * Get category
+     *
+     * @return \AppBundle\Entity\Category 
+     */
+    public function getCategory()
+    {
+        return $this->category;
     }
 }
