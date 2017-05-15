@@ -15,7 +15,7 @@ class OfferType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder->add('title')
-            ->add('description')
+            ->add('description')->add('price')
             ->add('category','entity', ['class'=>'AppBundle\Entity\Category','choice_label'=>'name']);
     }
     

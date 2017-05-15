@@ -14,15 +14,19 @@
                 <td>{{ offer.description }}</td>
             </tr>
             <tr>
-                <th>Data dodania</th>
+                <th>Date of publication</th>
                 <td>{% if offer.expiredAt %}{{ offer.expiredAt|date('Y-m-d H:i:s') }}{% endif %}</td>
             </tr>
             <tr>
-                <th>Uzytkownik</th>
+                <th>User</th>
                 <td>{{ user.username }}</td>
             </tr>
             <tr>
-                <th>Kategoria</th>
+                <th>Price</th>
+                <td>{{ offer.price }} PLN</td>
+            </tr>
+            <tr>
+                <th>Category</th>
                 <td>{{ offer.category.name }}</td>
             </tr>
         </tbody>

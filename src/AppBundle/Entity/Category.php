@@ -106,4 +106,7 @@ class Category
     {
         return $this->offers;
     }
+    public function __toString() {
+        return $this->name;
+    }
 }

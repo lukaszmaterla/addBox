@@ -9,6 +9,7 @@
             <th>Title</th>
             <th>Description</th>
             <th>Expiredat</th>
+            <th>Price</th>
             <th></th>
         </tr>
         </thead>
@@ -18,6 +19,7 @@
                 <td><a href="{{ path('offer_show', { 'id': offer.id }) }}">{{ offer.title }}</a></td>
                 <td>{{ offer.description }}</td>
                 <td>{% if offer.expiredAt %}{{ offer.expiredAt|date('Y-m-d H:i:s') }}{% endif %}</td>
+                <td>{{ offer.price }} PLN</td>
                 <td>
                     <a class="btn btn-success" href="{{ path('offer_show', { 'id': offer.id }) }}">show</a>
                     <a class="btn btn-primary" href="{{ path('offer_edit', { 'id': offer.id }) }}">edit</a>

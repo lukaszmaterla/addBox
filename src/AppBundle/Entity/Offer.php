@@ -44,6 +44,13 @@ class Offer
 
     /**
      * @var
+     * @ORM\Column(name="price", type="decimal", precision=10, scale=2)
+     */
+
+    private $price;
+
+    /**
+     * @var
      * @ORM\ManyToOne(targetEntity="AppBundle\Entity\User", inversedBy="offers")
      * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
      */
@@ -180,5 +187,31 @@ class Offer
     public function getCategory()
     {
         return $this->category;
+    }
+    public function __toString() {
+        return $this->title;
+    }
+
+    /**
+     * Set price
+     *
+     * @param string $price
+     * @return Offer
+     */
+    public function setPrice($price)
+    {
+        $this->price = $price;
+
+        return $this;
+    }
+
+    /**
+     * Get price
+     *
+     * @return string 
+     */
+    public function getPrice()
+    {
+        return $this->price;
     }
 }

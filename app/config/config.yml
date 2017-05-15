@@ -81,3 +81,5 @@ easy_admin:
             class: AppBundle\Entity\User
         Offer:
             class: AppBundle\Entity\Offer
+        Category:
+            class: AppBundle\Entity\Category
