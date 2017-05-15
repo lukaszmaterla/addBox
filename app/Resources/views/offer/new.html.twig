@@ -2,10 +2,9 @@
 
 {% block body %}
     <h1>Offer creation</h1>
-
     {{ form_start(form) }}
-        {{ form_widget(form) }}
-        <input type="submit" value="Create" />
+    {{ form_widget(form) }}
+    <input class="btn btn-success" type="submit" value="Create"/>
     {{ form_end(form) }}
-
+    <a href="{{ path('fos_user_profile_show') }}" class="btn btn-primary">Back to profile</a>
 {% endblock %}

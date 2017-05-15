@@ -6,7 +6,8 @@ use AppBundle\Entity\Category;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;use Symfony\Component\HttpFoundation\Request;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Symfony\Component\HttpFoundation\Request;
 
 /**
  * Category controller.
@@ -68,14 +69,14 @@ class CategoryController extends Controller
     public function showAction(Category $category, $id)
     {
         $user = $this->getUser();
-        $offers = $this->getDoctrine()->getRepository('AppBundle:Offer')->findBy(['category'=>$id]);
+        $offers = $this->getDoctrine()->getRepository('AppBundle:Offer')->findBy(['category' => $id]);
         $deleteForm = $this->createDeleteForm($category);
 
         return $this->render('category/show.html.twig', array(
             'category' => $category,
             'delete_form' => $deleteForm->createView(),
             'offers' => $offers,
-            'user'=>$user
+            'user' => $user
         ));
     }
 
@@ -138,7 +139,6 @@ class CategoryController extends Controller
         return $this->createFormBuilder()
             ->setAction($this->generateUrl('category_delete', array('id' => $category->getId())))
             ->setMethod('DELETE')
-            ->getForm()
-        ;
+            ->getForm();
     }
 }

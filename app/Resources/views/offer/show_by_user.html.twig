@@ -20,9 +20,17 @@
                 <td>{{ offer.price }} PLN</td>
                 <td>
                     <a class="btn btn-success" href="{{ path('offer_show', { 'id': offer.id }) }}">show</a>
+                    <a class="btn btn-primary" href="{{ path('offer_edit', { 'id': offer.id }) }}">edit</a>
+                    <a class="btn btn-danger" href="{{ path('offer_delete', { 'id': offer.id }) }}">delete</a>
                 </td>
             </tr>
         {% endfor %}
+        <tr>
+            <td><a class="btn btn-primary" href="{{ path('offer_new') }}">Add new offer</a></td>
+        </tr>
         </tbody>
     </table>
+    <div class="pull-right">
+
+    </div>
 {% endblock %}

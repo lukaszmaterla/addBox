@@ -1,39 +1,44 @@
 {% extends '::base.html.twig' %}
 {% block body %}
+
     <h1>Offer</h1>
 
     <table class="table">
         <tbody>
-            <tr>
-                <th>Title</th>
-                <td>{{ offer.title }}</td>
-            </tr>
-            <tr>
-                <th>Description</th>
-                <td>{{ offer.description }}</td>
-            </tr>
-            <tr>
-                <th>Date of publication</th>
-                <td>{% if offer.expiredAt %}{{ offer.expiredAt|date('Y-m-d H:i:s') }}{% endif %}</td>
-            </tr>
-            <tr>
-                <th>User</th>
-                <td>{{ offer.user.username }}</td>
-            </tr>
-            <tr>
-                <th>Price</th>
-                <td>{{ offer.price }} PLN</td>
-            </tr>
-            <tr>
-                <th>Category</th>
-                <td>{{ offer.category.name }}</td>
-            </tr>
+        <tr>
+            <th>Title</th>
+            <td>{{ offer.title }}</td>
+        </tr>
+        <tr>
+            <th>Description</th>
+            <td>{{ offer.description }}</td>
+        </tr>
+        <tr>
+            <th>Date of publication</th>
+            <td>{% if offer.expiredAt %}{{ offer.expiredAt|date('Y-m-d H:i:s') }}{% endif %}</td>
+        </tr>
+        <tr>
+            <th>User</th>
+            <td>{{ offer.user.username }}</td>
+        </tr>
+        <tr>
+            <th>Price</th>
+            <td>{{ offer.price }} PLN</td>
+        </tr>
+        <tr>
+            <th>Category</th>
+            <td>{{ offer.category.name }}</td>
+        </tr>
         </tbody>
     </table>
 
-            {{ form_start(delete_form) }}
-            {{ form_end(delete_form) }}
+    {{ form_start(delete_form) }}
+    {{ form_end(delete_form) }}
+
+    {% if app.user and app.user.username == offer.user.username %}
+        <a class="btn btn-danger" href="{{ path('offer_delete',{'id': offer.id}) }}">Delete</a>
+        <a class="btn btn-primary" href="{{ path('offer_edit', {'id': offer.id}) }}">Edit</a>
+        <a class="btn btn-default" href="{{ path('app_useroffer_showbyuser') }}">Back to profile</a><br>
+    {% endif %}
     <a class="btn btn-success" href="{{ path('homepage') }}">Back to the list</a>
-
-
 {% endblock %}

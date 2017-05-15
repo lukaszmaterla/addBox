@@ -50,13 +50,13 @@ class OfferController extends Controller
             $em->persist($offer);
             $em->flush();
 
-            return $this->redirectToRoute('offer_show', array('id' => $offer->getId(),'user'=> $user));
+            return $this->redirectToRoute('offer_show', array('id' => $offer->getId(), 'user' => $user));
         }
 
         return $this->render('offer/new.html.twig', array(
             'offer' => $offer,
             'form' => $form->createView(),
-            'user'=>$user
+            'user' => $user
 
         ));
     }
@@ -75,7 +75,7 @@ class OfferController extends Controller
         return $this->render('offer/show.html.twig', array(
             'offer' => $offer,
             'delete_form' => $deleteForm->createView(),
-            'user'=> $user
+            'user' => $user
         ));
     }
 
@@ -88,6 +88,7 @@ class OfferController extends Controller
      */
     public function editAction(Request $request, Offer $offer)
     {
+        $user = $this->getUser();
         $deleteForm = $this->createDeleteForm($offer);
         $editForm = $this->createForm('AppBundle\Form\OfferType', $offer);
         $editForm->handleRequest($request);
@@ -102,6 +103,7 @@ class OfferController extends Controller
             'offer' => $offer,
             'edit_form' => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),
+            'user' => $user
         ));
     }
 
@@ -114,6 +116,7 @@ class OfferController extends Controller
      */
     public function deleteAction(Request $request, Offer $offer)
     {
+        $user = $this->getUser();
         $form = $this->createDeleteForm($offer);
         $form->handleRequest($request);
 
@@ -123,7 +126,7 @@ class OfferController extends Controller
             $em->flush();
         }
 
-        return $this->redirectToRoute('offer_index');
+        return $this->redirectToRoute('app_useroffer_showbyuser', ['user' => $user]);
     }
 
     /**
@@ -138,7 +141,6 @@ class OfferController extends Controller
         return $this->createFormBuilder()
             ->setAction($this->generateUrl('offer_delete', array('id' => $offer->getId())))
             ->setMethod('DELETE')
-            ->getForm()
-        ;
+            ->getForm();
     }
 }
