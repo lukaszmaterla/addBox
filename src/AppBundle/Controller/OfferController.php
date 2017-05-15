@@ -38,7 +38,6 @@ class OfferController extends Controller
     public function newAction(Request $request)
     {
         $user = $this->getUser();
-        $userId = $this->getUser()->getId();
 
         $offer = new Offer();
         $form = $this->createForm('AppBundle\Form\OfferType', $offer);
@@ -72,9 +71,7 @@ class OfferController extends Controller
     public function showAction(Offer $offer)
     {
         $deleteForm = $this->createDeleteForm($offer);
-        $userId= $offer->getUser();
-        $user = $this->getDoctrine()->getRepository('AppBundle:User')->find($userId);
-
+        $user = $this->getUser();
         return $this->render('offer/show.html.twig', array(
             'offer' => $offer,
             'delete_form' => $deleteForm->createView(),
