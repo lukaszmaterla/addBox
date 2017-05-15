@@ -3,6 +3,7 @@
 namespace AppBundle\Controller;
 
 use AppBundle\Entity\Category;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;use Symfony\Component\HttpFoundation\Request;
@@ -10,7 +11,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;use Symfony\Component
 /**
  * Category controller.
  *
- * @Route("category")
+ * @Route("/category")
  */
 class CategoryController extends Controller
 {
@@ -36,6 +37,7 @@ class CategoryController extends Controller
      *
      * @Route("/new", name="category_new")
      * @Method({"GET", "POST"})
+     * @Security("has_role('ROLE_ADMIN')")
      */
     public function newAction(Request $request)
     {
@@ -63,13 +65,17 @@ class CategoryController extends Controller
      * @Route("/{id}", name="category_show")
      * @Method("GET")
      */
-    public function showAction(Category $category)
+    public function showAction(Category $category, $id)
     {
+        $user = $this->getUser();
+        $offers = $this->getDoctrine()->getRepository('AppBundle:Offer')->findBy(['category'=>$id]);
         $deleteForm = $this->createDeleteForm($category);
 
         return $this->render('category/show.html.twig', array(
             'category' => $category,
             'delete_form' => $deleteForm->createView(),
+            'offers' => $offers,
+            'user'=>$user
         ));
     }
 
@@ -78,6 +84,7 @@ class CategoryController extends Controller
      *
      * @Route("/{id}/edit", name="category_edit")
      * @Method({"GET", "POST"})
+     * @Security("has_role('ROLE_ADMIN')")
      */
     public function editAction(Request $request, Category $category)
     {
@@ -103,6 +110,7 @@ class CategoryController extends Controller
      *
      * @Route("/{id}", name="category_delete")
      * @Method("DELETE")
+     * @Security("has_role('ROLE_ADMIN')")
      */
     public function deleteAction(Request $request, Category $category)
     {

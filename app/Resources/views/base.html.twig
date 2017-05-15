@@ -8,12 +8,26 @@
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     </head>
     <body>
-
+    {% block nav %}
+    <div class="container">
+        {{ include('content/nav.html.twig') }}
+    </div>
+    {% endblock %}
         <div class="container">
         {% block body %}
+
+
+            {{ render(controller('AppBundle:Category:index')) }}
             {{ render(controller('AppBundle:Offer:index')) }}
         {% endblock %}
         </div>
-        {% block javascripts %}{% endblock %}
+        {% block javascripts %}
+
+        <!-- jQuery library -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+        <!-- Latest compiled JavaScript -->
+            <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+        {% endblock %}
     </body>
 </html>

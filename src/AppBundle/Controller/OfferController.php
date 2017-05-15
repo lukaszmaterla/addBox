@@ -6,21 +6,17 @@ use AppBundle\Entity\Offer;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;use Symfony\Component\HttpFoundation\Request;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Symfony\Component\HttpFoundation\Request;
 
-/**
- * Offer controller.
- *
- * @Route("offer")
- */
 class OfferController extends Controller
 {
-    /**
-     * Lists all offer entities.
-     *
-     * @Route("/", name="offer_index")
-     * @Method("GET")
-     */
+//    /**
+//     * Lists all offer entities.
+//     *
+//     * @Route("/", name="offer_index")
+//     * @Method("GET")
+//     */
     public function indexAction()
     {
         $em = $this->getDoctrine()->getManager();
@@ -35,7 +31,7 @@ class OfferController extends Controller
     /**
      * Creates a new offer entity.
      *
-     * @Route("/new", name="offer_new")
+     * @Route("offer/new", name="offer_new")
      * @Method({"GET", "POST"})
      * @Security("has_role('ROLE_USER')")
      */
@@ -61,6 +57,7 @@ class OfferController extends Controller
         return $this->render('offer/new.html.twig', array(
             'offer' => $offer,
             'form' => $form->createView(),
+            'user'=>$user
 
         ));
     }
@@ -68,7 +65,7 @@ class OfferController extends Controller
     /**
      * Finds and displays a offer entity.
      *
-     * @Route("/{id}", name="offer_show")
+     * @Route("offer/{id}", name="offer_show")
      * @Method("GET")
      *
      */
@@ -88,7 +85,7 @@ class OfferController extends Controller
     /**
      * Displays a form to edit an existing offer entity.
      *
-     * @Route("/{id}/edit", name="offer_edit")
+     * @Route("offer/{id}/edit", name="offer_edit")
      * @Method({"GET", "POST"})
      * @Security("has_role('ROLE_USER')")
      */
@@ -114,7 +111,7 @@ class OfferController extends Controller
     /**
      * Deletes a offer entity.
      *
-     * @Route("/{id}", name="offer_delete")
+     * @Route("offer/{id}", name="offer_delete")
      * @Method("DELETE")
      * @Security("has_role('ROLE_USER')")
      */

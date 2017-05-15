@@ -2,12 +2,17 @@
 
 namespace AppBundle\Controller;
 
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
 class UserOfferController extends Controller
 {
-    public function indexAction($name)
+    /**
+     * @Route("profile/offer")
+     */
+    public function showByUser()
     {
-        return $this->render('', array('name' => $name));
+
+
     }
 }

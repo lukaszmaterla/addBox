@@ -1,32 +1,31 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <h1>Category</h1>
+    {{ render(controller('AppBundle:Category:index')) }}
+    <h2>{{ category.name }}</h2>
 
-    <table>
+    <table class="table">
+        <thead>
+        <tr>
+            <th>Title</th>
+            <th>Description</th>
+            <th>Expiredat</th>
+            <th>Price</th>
+            <th></th>
+        </tr>
+        </thead>
         <tbody>
+        {% for offer in offers %}
             <tr>
-                <th>Id</th>
-                <td>{{ category.id }}</td>
+                <td><a href="{{ path('offer_show', { 'id': offer.id }) }}">{{ offer.title }}</a></td>
+                <td>{{ offer.description }}</td>
+                <td>{% if offer.expiredAt %}{{ offer.expiredAt|date('Y-m-d H:i:s') }}{% endif %}</td>
+                <td>{{ offer.price }} PLN</td>
+                <td>
+                    <a class="btn btn-success" href="{{ path('offer_show', { 'id': offer.id }) }}">show</a>
+                </td>
             </tr>
-            <tr>
-                <th>Name</th>
-                <td>{{ category.name }}</td>
-            </tr>
+        {% endfor %}
         </tbody>
     </table>
-
-    <ul>
-        <li>
-            <a href="{{ path('category_index') }}">Back to the list</a>
-        </li>
-        <li>
-            <a href="{{ path('category_edit', { 'id': category.id }) }}">Edit</a>
-        </li>
-        <li>
-            {{ form_start(delete_form) }}
-                <input type="submit" value="Delete">
-            {{ form_end(delete_form) }}
-        </li>
-    </ul>
 {% endblock %}

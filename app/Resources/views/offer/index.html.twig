@@ -1,5 +1,3 @@
-{% extends 'base.html.twig' %}
-
 {% block body %}
     <h1>Offers list</h1>
 
@@ -22,7 +20,6 @@
                 <td>{{ offer.price }} PLN</td>
                 <td>
                     <a class="btn btn-success" href="{{ path('offer_show', { 'id': offer.id }) }}">show</a>
-                    <a class="btn btn-primary" href="{{ path('offer_edit', { 'id': offer.id }) }}">edit</a>
                 </td>
             </tr>
         {% endfor %}
