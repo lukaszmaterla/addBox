@@ -31,11 +31,16 @@ class User extends BaseUser
      *
      */
     private $offers;
+    /**
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Comment", mappedBy="user")
+     */
+    private $comments;
 
     public function __construct()
     {
         parent::__construct();
         $this->offers = new ArrayCollection();
+        $this->comments = new ArrayCollection();
     }
 
     /**

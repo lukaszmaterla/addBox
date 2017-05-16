@@ -24,7 +24,7 @@ class Category
     /**
      * @var string
      *
-     * @ORM\Column(name="name", type="string", length=255)
+     * @ORM\Column(name="name", type="string", length=255, nullable=true)
      */
     private $name;
 
@@ -105,5 +105,8 @@ class Category
     public function getOffers()
     {
         return $this->offers;
+    }
+    public function __toString() {
+        return $this->name;
     }
 }

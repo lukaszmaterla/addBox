@@ -191,4 +191,27 @@ class Offer
     public function __toString() {
         return $this->title;
     }
+
+    /**
+     * Set price
+     *
+     * @param string $price
+     * @return Offer
+     */
+    public function setPrice($price)
+    {
+        $this->price = $price;
+
+        return $this;
+    }
+
+    /**
+     * Get price
+     *
+     * @return string 
+     */
+    public function getPrice()
+    {
+        return $this->price;
+    }
 }
