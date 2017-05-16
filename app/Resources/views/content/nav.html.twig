@@ -28,7 +28,7 @@
             </ul>
             <ul class="nav navbar-nav navbar-right">
                 {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
-                    <li><a>Logged as: <span class="" style="color: #1b6d85;font-weight: 900">{{ user.username }}</span></a></li>
+                    <li><a>Logged as: <span class="" style="color: #1b6d85;font-weight: 900  ">{{ user.username }}</span></a></li>
 
                     <li class=""><a href="{{ path('fos_user_profile_show') }}">Profile</a></li>
                     <li><a href="{{ path('fos_user_security_logout') }}">
