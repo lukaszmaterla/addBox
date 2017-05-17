@@ -75,9 +75,10 @@ class OfferController extends Controller
         $comment = new Comment();
         $formComment = $this->createForm('AppBundle\Form\CommentType', $comment);
         $formComment->handleRequest($request);
-
+        $offerUser = $offer->getUser();
         if ($formComment->isSubmitted() && $formComment->isValid()) {
 
+            $this->sendEmailtoOfferOwner($offerUser->getEmail(),$offer, $comment );
 
             $em = $this->getDoctrine()->getManager();
             $comment->setOffer($offer);
@@ -160,13 +161,14 @@ class OfferController extends Controller
             ->getForm();
     }
 
-    private function sendEmailtoOfferOwner($userEmail, $name){
+    private function sendEmailtoOfferOwner($userEmail, Offer $offer, Comment $comment){
 
         $mail = \Swift_Message::newInstance()
-            ->setSubject('New comment to your offer')
-            ->setFrom('AddBox')
+            ->setSubject('New comment to your offer '.$offer->getTitle())
+            ->setFrom('symfony.examplemailer@gmail.com')
             ->setTo($userEmail)
-            ->setBody('You got new information');
+            ->setBody($this->renderView(':email:new_comment_email.html.twig',['offer'=>$offer, 'comment'=>$comment])
+                ,'text/html');
         $this->get('mailer')->send($mail);
 
     }
