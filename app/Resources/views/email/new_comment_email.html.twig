@@ -1,0 +1,16 @@
+
+<div>
+
+    <p>Hi {{ offer.user.username }}! You get a new comment to your offer</p> <h3>{{ offer.title }}</h3>
+    <p>{{ offer.description }}</p>
+    <hr>
+    <h3>Comment:</h3>
+    <p>{{ comment.content }}</p>
+
+    <p>added by: {{ comment.user }}</p>
+
+    <p>Check on the website <a href="{{ url('offer_show',{'id':offer.id} ) }}">Check</a>.
+    Thanks!</p>
+
+</div>
+
