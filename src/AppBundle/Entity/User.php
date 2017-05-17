@@ -25,12 +25,14 @@ class User extends BaseUser
      * @ORM\GeneratedValue(strategy="AUTO")
      */
     protected $id;
+
     /**
      * @var
      * @ORM\OneToMany(targetEntity="AppBundle\Entity\Offer", mappedBy="user")
      *
      */
     private $offers;
+
     /**
      * @ORM\OneToMany(targetEntity="AppBundle\Entity\Comment", mappedBy="user")
      */
@@ -106,6 +108,11 @@ class User extends BaseUser
      */
     public function getComments()
     {
+        return $this->comments;
+    }
+
+    public function __toString(){
+
         return $this->comments;
     }
 }

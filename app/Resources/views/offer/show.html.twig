@@ -42,20 +42,21 @@
     <h3>Comments:</h3>
     {{ form_start(formComment) }}
     {{ form_widget(formComment) }}
-    <input class="btn btn-info pull-right" type="submit" value="Create" />
+    <input class="btn btn-info pull-right" type="submit" value="Create"/>
     {{ form_end(formComment) }}
     {% for comment in offer.comments %}
         <div>
-            <span>Dodany: {{ comment.createdAt|date('H:i d/m/Y') }}</span>
+            <span>{{ comment.createdAt|date('H:i d/m/Y') }}</span>
             {% if comment.user != null %}
-                <span> przez: {{ comment.user }}</span>
+                <span>by: {{ comment.user }}</span>
             {% else %}
-                <span>przez: anonim</span>
+                <span>by: anonim</span>
             {% endif %}
             <p>{{ comment.content }}</p>
 
         </div>
-{% else %}
-    <div>Need your comment, be first!</div>
-{% endfor %}
+        <hr>
+    {% else %}
+        <div>Need your comment, be first!</div>
+    {% endfor %}
 {% endblock %}

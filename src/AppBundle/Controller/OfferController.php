@@ -72,7 +72,6 @@ class OfferController extends Controller
     public function showAction(Request $request, Offer $offer)
     {
         $user = $this->getUser();
-        dump($user);
         $comment = new Comment();
         $formComment = $this->createForm('AppBundle\Form\CommentType', $comment);
         $formComment->handleRequest($request);
