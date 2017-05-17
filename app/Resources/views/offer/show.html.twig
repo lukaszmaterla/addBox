@@ -32,9 +32,6 @@
         </tbody>
     </table>
 
-    {{ form_start(delete_form) }}
-    {{ form_end(delete_form) }}
-
     {% if app.user and app.user.username == offer.user.username %}
         <a class="btn btn-danger" href="{{ path('offer_delete',{'id': offer.id}) }}">Delete</a>
         <a class="btn btn-primary" href="{{ path('offer_edit', {'id': offer.id}) }}">Edit</a>
@@ -42,5 +39,23 @@
     {% endif %}
     <a class="btn btn-success" href="{{ path('homepage') }}">Back to the list</a>
     <hr>
-    <h3>Komentarze:</h3>
+    <h3>Comments:</h3>
+    {{ form_start(formComment) }}
+    {{ form_widget(formComment) }}
+    <input class="btn btn-info pull-right" type="submit" value="Create" />
+    {{ form_end(formComment) }}
+    {% for comment in offer.comments %}
+        <div>
+            <span>Dodany: {{ comment.createdAt|date('H:i d/m/Y') }}</span>
+            {% if comment.user != null %}
+                <span> przez: {{ comment.user }}</span>
+            {% else %}
+                <span>przez: anonim</span>
+            {% endif %}
+            <p>{{ comment.content }}</p>
+
+        </div>
+{% else %}
+    <div>Need your comment, be first!</div>
+{% endfor %}
 {% endblock %}

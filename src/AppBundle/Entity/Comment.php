@@ -43,6 +43,15 @@ class Comment
      */
     private $user;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Offer", inversedBy="comments")
+     */
+    private $offer;
+
+    public function __construct()
+    {
+        $this->createdAt = new \DateTime();
+    }
 
     /**
      * Get id
@@ -121,5 +130,28 @@ class Comment
     public function getUser()
     {
         return $this->user;
+    }
+
+    /**
+     * Set offer
+     *
+     * @param \AppBundle\Entity\Offer $offer
+     * @return Comment
+     */
+    public function setOffer(\AppBundle\Entity\Offer $offer = null)
+    {
+        $this->offer = $offer;
+
+        return $this;
+    }
+
+    /**
+     * Get offer
+     *
+     * @return \AppBundle\Entity\Offer 
+     */
+    public function getOffer()
+    {
+        return $this->offer;
     }
 }

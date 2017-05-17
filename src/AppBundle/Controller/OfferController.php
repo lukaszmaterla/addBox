@@ -2,6 +2,7 @@
 
 namespace AppBundle\Controller;
 
+use AppBundle\Entity\Comment;
 use AppBundle\Entity\Offer;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -65,17 +66,31 @@ class OfferController extends Controller
      * Finds and displays a offer entity.
      *
      * @Route("offer/{id}", name="offer_show")
-     * @Method("GET")
+     * @Method({"GET", "POST"})
      *
      */
-    public function showAction(Offer $offer)
+    public function showAction(Request $request, Offer $offer)
     {
-        $deleteForm = $this->createDeleteForm($offer);
         $user = $this->getUser();
+        dump($user);
+        $comment = new Comment();
+        $formComment = $this->createForm('AppBundle\Form\CommentType', $comment);
+        $formComment->handleRequest($request);
+
+        if ($formComment->isSubmitted() && $formComment->isValid()) {
+            $em = $this->getDoctrine()->getManager();
+            $comment->setOffer($offer);
+            $comment->setUser($user);
+            $em->persist($comment);
+            $em->flush();
+
+            return $this->redirectToRoute('offer_show', array('id' => $offer->getId()));
+        }
         return $this->render('offer/show.html.twig', array(
-            'offer' => $offer,
-            'delete_form' => $deleteForm->createView(),
-            'user' => $user
+            'offer'=>$offer,
+            'id' => $offer->getId(),
+            'user' => $user,
+            'formComment'=>$formComment->createView()
         ));
     }
 
