@@ -77,6 +77,8 @@ class OfferController extends Controller
         $formComment->handleRequest($request);
 
         if ($formComment->isSubmitted() && $formComment->isValid()) {
+
+
             $em = $this->getDoctrine()->getManager();
             $comment->setOffer($offer);
             $em->persist($comment);
@@ -156,5 +158,16 @@ class OfferController extends Controller
             ->setAction($this->generateUrl('offer_delete', array('id' => $offer->getId())))
             ->setMethod('DELETE')
             ->getForm();
+    }
+
+    private function sendEmailtoOfferOwner($userEmail, $name){
+
+        $mail = \Swift_Message::newInstance()
+            ->setSubject('New comment to your offer')
+            ->setFrom('AddBox')
+            ->setTo($userEmail)
+            ->setBody('You got new information');
+        $this->get('mailer')->send($mail);
+
     }
 }
