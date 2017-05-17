@@ -37,9 +37,7 @@ class Comment
 
     /**
      * @var string
-     *
-     * @ORM\Column(name="user", type="string", length=255, nullable=true)
-     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\User", inversedBy="comments")
+     * @ORM\Column(name="user",type="string", length=255)
      */
     private $user;
 
@@ -47,17 +45,17 @@ class Comment
      * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Offer", inversedBy="comments")
      */
     private $offer;
+    /**
+     * Get id
+     *
+     * @return integer 
+     */
 
     public function __construct()
     {
         $this->createdAt = new \DateTime();
     }
 
-    /**
-     * Get id
-     *
-     * @return integer 
-     */
     public function getId()
     {
         return $this->id;
@@ -153,5 +151,9 @@ class Comment
     public function getOffer()
     {
         return $this->offer;
+    }
+    public function __toString(){
+
+        return (string) $this->getUser();
     }
 }

@@ -36,7 +36,6 @@ twig:
     strict_variables: '%kernel.debug%'
     form:
         resources: ['bootstrap_3_layout.html.twig']
-
 # Doctrine Configuration
 doctrine:
     dbal:
@@ -85,3 +84,5 @@ easy_admin:
             class: AppBundle\Entity\Offer
         Category:
             class: AppBundle\Entity\Category
+        Comment:
+            class: AppBundle\Entity\Comment

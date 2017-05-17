@@ -66,7 +66,7 @@ class OfferController extends Controller
      * Finds and displays a offer entity.
      *
      * @Route("offer/{id}", name="offer_show")
-     * @Method({"GET", "POST"})
+     * @Method({"GET","POST"})
      *
      */
     public function showAction(Request $request, Offer $offer)
@@ -79,15 +79,15 @@ class OfferController extends Controller
         if ($formComment->isSubmitted() && $formComment->isValid()) {
             $em = $this->getDoctrine()->getManager();
             $comment->setOffer($offer);
-            $comment->setUser($user);
             $em->persist($comment);
             $em->flush();
 
             return $this->redirectToRoute('offer_show', array('id' => $offer->getId()));
         }
+
+
         return $this->render('offer/show.html.twig', array(
-            'offer'=>$offer,
-            'id' => $offer->getId(),
+            'offer' => $offer,
             'user' => $user,
             'formComment'=>$formComment->createView()
         ));

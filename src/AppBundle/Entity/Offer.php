@@ -68,12 +68,10 @@ class Offer
      *
      * @return integer 
      */
-
     /**
      * @ORM\OneToMany(targetEntity="AppBundle\Entity\Comment", mappedBy="offer")
      */
     private $comments;
-
     public function getId()
     {
         return $this->id;
