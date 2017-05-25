@@ -4,6 +4,9 @@
     <table class="table">
         <thead>
         <tr>
+            <td><h2>Actual Offer</h2></td>
+        </tr>
+        <tr>
             <th>Title</th>
             <th>Description</th>
             <th>Expiredat</th>
@@ -30,7 +33,42 @@
         </tr>
         </tbody>
     </table>
-    <div class="pull-right">
+    <table class="table">
+        <thead>
+        <tr>
+            <td><h2>Expired Offer</h2></td>
+        </tr>
+        <tr>
+            <th>Title</th>
+            <th>Description</th>
+            <th>Expiredat</th>
+            <th>Price</th>
+            <th></th>
+        </tr>
+        </thead>
+        <tbody>
+        {% if archiveOffers %}
 
-    </div>
+            {% for archiveOffer in archiveOffers %}
+                <tr>
+                    <td><a href="{{ path('offer_show', { 'id': archiveOffer.id }) }}">{{ archiveOffer.title }}</a></td>
+                    <td>{{ archiveOffer.description }}</td>
+                    <td>{% if archiveOffer.expiredAt %}{{ archiveOffer.expiredAt|date('Y-m-d H:i:s') }}{% endif %}</td>
+                    <td>{{ archiveOffer.price }} PLN</td>
+                    <td>
+                        <a class="btn btn-success" href="{{ path('offer_show', { 'id': archiveOffer.id }) }}">show</a>
+                        <a class="btn btn-primary" href="{{ path('offer_edit', { 'id': archiveOffer.id }) }}">edit</a>
+                        <a class="btn btn-danger"
+                           href="{{ path('offer_delete', { 'id': archiveOffer.id }) }}">delete</a>
+                    </td>
+                </tr>
+            {% endfor %}
+
+        {% else %}
+            <tr>
+                <td>Wszystkie ogłoszenia aktywne</td>
+            </tr>
+        {% endif %}
+        </tbody>
+    </table>
 {% endblock %}

@@ -4,6 +4,7 @@ namespace AppBundle\Form;
 
 use function PHPSTORM_META\type;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -14,7 +15,7 @@ class CommentType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('content', 'textarea', ['label'=>false, 'attr'=>['placeholder'=>'Add comment ...']])->add('user',null, ['label'=>false , 'attr'=>['placeholder'=>'Name ...']]);
+        $builder->add('content', TextareaType::class, ['label'=>false, 'attr'=>['placeholder'=>'Add comment ...']])->add('user',null, ['label'=>false , 'attr'=>['placeholder'=>'Name ...']]);
     }
     
     /**

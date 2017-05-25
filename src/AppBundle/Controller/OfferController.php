@@ -4,6 +4,7 @@ namespace AppBundle\Controller;
 
 use AppBundle\Entity\Comment;
 use AppBundle\Entity\Offer;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
@@ -22,7 +23,7 @@ class OfferController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $offers = $em->getRepository('AppBundle:Offer')->findBy([], ['expiredAt'=>'ASC']);
+        $offers = $em->getRepository('AppBundle:Offer')->findActiveOfferByDate();
 
         return $this->render('offer/index.html.twig', array(
             'offers' => $offers,
@@ -78,7 +79,7 @@ class OfferController extends Controller
         $offerUser = $offer->getUser();
         if ($formComment->isSubmitted() && $formComment->isValid()) {
 
-            $this->sendEmailtoOfferOwner($offerUser->getEmail(),$offer, $comment );
+            $this->sendEmailtoOfferOwner($offerUser->getEmail(), $offer, $comment);
 
             $em = $this->getDoctrine()->getManager();
             $comment->setOffer($offer);
@@ -92,7 +93,7 @@ class OfferController extends Controller
         return $this->render('offer/show.html.twig', array(
             'offer' => $offer,
             'user' => $user,
-            'formComment'=>$formComment->createView()
+            'formComment' => $formComment->createView()
         ));
     }
 
@@ -160,14 +161,15 @@ class OfferController extends Controller
             ->getForm();
     }
 
-    private function sendEmailtoOfferOwner($userEmail, Offer $offer, Comment $comment){
+    private function sendEmailtoOfferOwner($userEmail, Offer $offer, Comment $comment)
+    {
 
         $mail = \Swift_Message::newInstance()
-            ->setSubject('New comment to your offer '.$offer->getTitle())
+            ->setSubject('New comment to your offer ' . $offer->getTitle())
             ->setFrom('symfony.examplemailer@gmail.com')
             ->setTo($userEmail)
-            ->setBody($this->renderView(':email:new_comment_email.html.twig',['offer'=>$offer, 'comment'=>$comment])
-                ,'text/html');
+            ->setBody($this->renderView(':email:new_comment_email.html.twig', ['offer' => $offer, 'comment' => $comment])
+                , 'text/html');
         $this->get('mailer')->send($mail);
 
     }

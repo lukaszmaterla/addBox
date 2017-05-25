@@ -69,7 +69,7 @@ class CategoryController extends Controller
     public function showAction(Category $category, $id)
     {
         $user = $this->getUser();
-        $offers = $this->getDoctrine()->getRepository('AppBundle:Offer')->findBy(['category' => $id]);
+        $offers = $this->getDoctrine()->getRepository('AppBundle:Offer')->findActiveOfferByCategory($id);
         $deleteForm = $this->createDeleteForm($category);
 
         return $this->render('category/show.html.twig', array(
