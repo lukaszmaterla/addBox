@@ -22,7 +22,7 @@ class OfferController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $offers = $em->getRepository('AppBundle:Offer')->findAll();
+        $offers = $em->getRepository('AppBundle:Offer')->findBy([], ['expiredAt'=>'ASC']);
 
         return $this->render('offer/index.html.twig', array(
             'offers' => $offers,
@@ -47,7 +47,7 @@ class OfferController extends Controller
         if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();
             $offer->setUser($user);
-            $offer->setExpiredAt(new \DateTime());
+            $offer->setExpiredAt();
             $em->persist($offer);
             $em->flush();
 

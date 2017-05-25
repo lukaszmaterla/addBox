@@ -129,9 +129,9 @@ class Offer
      * @param \DateTime $expiredAt
      * @return Offer
      */
-    public function setExpiredAt($expiredAt)
+    public function setExpiredAt()
     {
-        $this->expiredAt = $expiredAt;
+        $this->expiredAt = new \DateTime();
 
         return $this;
     }
