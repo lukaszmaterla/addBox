@@ -27,6 +27,24 @@ class User extends BaseUser
     protected $id;
 
     /**
+     * @ORM\Column(type="string", length=100, nullable=true)
+     */
+
+    protected $firstName;
+    /**
+     * @ORM\Column(type="string", length=100, nullable=true)
+     */
+    protected $lastName;
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    protected $city;
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    protected $phoneNumber;
+
+    /**
      * @var
      * @ORM\OneToMany(targetEntity="AppBundle\Entity\Offer", mappedBy="user")
      *
