@@ -127,17 +127,16 @@ class OfferController extends Controller
     /**
      * Deletes a offer entity.
      *
-     * @Route("offer/{id}", name="offer_delete")
-     * @Method("DELETE")
+     * @Route("offer/{id}/delete", name="offer_delete")
+     * @Method("GET")
      * @Security("has_role('ROLE_USER')")
      */
-    public function deleteAction(Request $request, Offer $offer)
+    public function deleteAction($id)
     {
         $user = $this->getUser();
-        $form = $this->createDeleteForm($offer);
-        $form->handleRequest($request);
+        $offer = $this->getDoctrine()->getRepository('AppBundle:Offer')->find($id);
 
-        if ($form->isSubmitted() && $form->isValid()) {
+        if ($offer) {
             $em = $this->getDoctrine()->getManager();
             $em->remove($offer);
             $em->flush();
