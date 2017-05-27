@@ -15,9 +15,9 @@ class CommentType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('content', TextareaType::class, ['label'=>false, 'attr'=>['placeholder'=>'Add comment ...']])->add('user',null, ['label'=>false , 'attr'=>['placeholder'=>'Name ...']]);
+        $builder->add('content', TextareaType::class, ['label' => false, 'attr' => ['placeholder' => 'Add comment ...']])->add('user', null, ['label' => false, 'attr' => ['placeholder' => 'Name ...']]);
     }
-    
+
     /**
      * {@inheritdoc}
      */

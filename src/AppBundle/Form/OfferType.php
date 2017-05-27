@@ -17,9 +17,9 @@ class OfferType extends AbstractType
         $builder->add('title')
             ->add('description')
             ->add('price')
-            ->add('category','entity', ['class'=>'AppBundle\Entity\Category','choice_label'=>'name']);
+            ->add('category', 'entity', ['class' => 'AppBundle\Entity\Category', 'choice_label' => 'name']);
     }
-    
+
     /**
      * {@inheritdoc}
      */
