@@ -27,7 +27,18 @@ addBox - Notice-board
     - edit profile and add new personal information
     - view only his offer divided into actives and archives 
 - if someone adds a comment the owner of the offer gets an email with the content, date and a link to check
+- offer have to add to one category  
+- category can create only promoted user to admin role
 
+### Routing:
+- /  - all user
+- /admin - only user has ROLE_ADMIN
+- /profile - only logged in users
+- /offer/new - only logged in users
+- /offer/{id} - all users
+- /profile/offer/ - only logged in users
+- /category/{id} - all users
+- /category/new - only admin
 ### Author
 
 * **Łukasz Materla** - [Profile](https://github.com/lukaszmaterla)

@@ -42,6 +42,7 @@ class CategoryController extends Controller
      */
     public function newAction(Request $request)
     {
+        $user = $this->getUser();
         $category = new Category();
         $form = $this->createForm('AppBundle\Form\CategoryType', $category);
         $form->handleRequest($request);
@@ -57,6 +58,7 @@ class CategoryController extends Controller
         return $this->render('category/new.html.twig', array(
             'category' => $category,
             'form' => $form->createView(),
+            'user' => $user
         ));
     }
 
