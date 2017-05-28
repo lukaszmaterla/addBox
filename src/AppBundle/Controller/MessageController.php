@@ -3,14 +3,17 @@
 namespace AppBundle\Controller;
 
 use AppBundle\Entity\Message;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;use Symfony\Component\HttpFoundation\Request;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Symfony\Component\HttpFoundation\Request;
 
 /**
  * Message controller.
  *
- * @Route("message")
+ * @Route("profile/message")
+ * @Security("has_role('ROLE_USER')")
  */
 class MessageController extends Controller
 {
@@ -22,12 +25,14 @@ class MessageController extends Controller
      */
     public function indexAction()
     {
+        $user = $this->getUser();
         $em = $this->getDoctrine()->getManager();
 
         $messages = $em->getRepository('AppBundle:Message')->findAll();
 
         return $this->render('message/index.html.twig', array(
             'messages' => $messages,
+            'user'=>$user
         ));
     }
 
@@ -39,6 +44,7 @@ class MessageController extends Controller
      */
     public function newAction(Request $request)
     {
+        $user = $this->getUser();
         $message = new Message();
         $form = $this->createForm('AppBundle\Form\MessageType', $message);
         $form->handleRequest($request);
@@ -54,6 +60,7 @@ class MessageController extends Controller
         return $this->render('message/new.html.twig', array(
             'message' => $message,
             'form' => $form->createView(),
+            'user' => $user
         ));
     }
 
@@ -65,11 +72,13 @@ class MessageController extends Controller
      */
     public function showAction(Message $message)
     {
+        $user = $this->getUser();
         $deleteForm = $this->createDeleteForm($message);
 
         return $this->render('message/show.html.twig', array(
             'message' => $message,
             'delete_form' => $deleteForm->createView(),
+            'user' => $user
         ));
     }
 
@@ -81,6 +90,7 @@ class MessageController extends Controller
      */
     public function editAction(Request $request, Message $message)
     {
+        $user = $this->getUser();
         $deleteForm = $this->createDeleteForm($message);
         $editForm = $this->createForm('AppBundle\Form\MessageType', $message);
         $editForm->handleRequest($request);
@@ -95,6 +105,7 @@ class MessageController extends Controller
             'message' => $message,
             'edit_form' => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),
+            'user' => $user
         ));
     }
 
@@ -106,6 +117,7 @@ class MessageController extends Controller
      */
     public function deleteAction(Request $request, Message $message)
     {
+        $user = $this->getUser();
         $form = $this->createDeleteForm($message);
         $form->handleRequest($request);
 
