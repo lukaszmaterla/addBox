@@ -2,6 +2,7 @@
 
 namespace AppBundle\Repository;
 
+use AppBundle\Entity\Message;
 use Doctrine\ORM\EntityRepository;
 
 /**
@@ -12,4 +13,22 @@ use Doctrine\ORM\EntityRepository;
  */
 class MessageRepository extends EntityRepository
 {
+    public function findyAllSendMessageByLoggedUser($id)
+    {
+        return $this->getEntityManager()
+            ->createQuery('SELECT m FROM AppBundle:Message m 
+            WHERE m.sender = :id ORDER BY m.createdAt DESC')
+            ->setParameter('id', $id)
+            ->getResult();
+    }
+
+    public function findAllReceiveredMessageByLoggedUser($id)
+    {
+        return $this->getEntityManager()
+            ->createQuery('SELECT m FROM AppBundle:Message m 
+            WHERE m.receiver = :id ORDER BY m.createdAt DESC')
+            ->setParameter('id', $id)
+            ->getResult();
+
+    }
 }

@@ -26,13 +26,13 @@ class MessageController extends Controller
      */
     public function indexAction()
     {
+        $userId =  $this->getUser()->getId();
         $user = $this->getUser();
-        $em = $this->getDoctrine()->getManager();
-
-        $messages = $em->getRepository('AppBundle:Message')->findAll();
-
+        $messagesSend = $this->getDoctrine()->getRepository('AppBundle:Message')->findyAllSendMessageByLoggedUser($userId);
+        $messagesReceiver = $this->getDoctrine()->getRepository('AppBundle:Message')->findAllReceiveredMessageByLoggedUser($userId);
         return $this->render('message/index.html.twig', array(
-            'messages' => $messages,
+            'messagesSend' => $messagesSend,
+            'messagesReceiver' => $messagesReceiver,
             'user'=>$user
         ));
     }
@@ -61,7 +61,7 @@ class MessageController extends Controller
             $em->persist($message);
             $em->flush();
 
-            return $this->redirectToRoute('message_show', array('id' => $message->getId()));
+            return $this->redirectToRoute('message_index');
         }
 
         return $this->render('message/new.html.twig', array(

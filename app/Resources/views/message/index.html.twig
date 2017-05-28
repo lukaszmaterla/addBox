@@ -1,41 +1,45 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <h1>Messages list</h1>
+    <h1>Messages Send</h1>
 
-    <table>
+    <table class="table">
         <thead>
             <tr>
-                <th>Id</th>
                 <th>Title</th>
                 <th>Content</th>
                 <th>Createdat</th>
                 <th>Status</th>
-                <th>Sender</th>
-                <th>Receiver</th>
-                <th>Actions</th>
             </tr>
         </thead>
         <tbody>
-        {% for message in messages %}
+        {% for messageSend in messagesSend %}
             <tr>
-                <td><a href="{{ path('message_show', { 'id': message.id }) }}">{{ message.id }}</a></td>
-                <td>{{ message.title }}</td>
-                <td>{{ message.content }}</td>
-                <td>{% if message.createdAt %}{{ message.createdAt|date('Y-m-d H:i:s') }}{% endif %}</td>
-                <td>{{ message.status }}</td>
-                <td>{{ message.sender }}</td>
-                <td>{{ message.receiver }}</td>
-                <td>
-                    <ul>
-                        <li>
-                            <a href="{{ path('message_show', { 'id': message.id }) }}">show</a>
-                        </li>
-                        <li>
-                            <a href="{{ path('message_edit', { 'id': message.id }) }}">edit</a>
-                        </li>
-                    </ul>
-                </td>
+                <td><a href="{{ path('message_show', { 'id': messageSend.id }) }}">{{ messageSend.title }}</a></td>
+                <td>{{ messageSend.content }}</td>
+                <td>{% if messageSend.createdAt %}{{ messageSend.createdAt|date('Y-m-d H:i:s') }}{% endif %}</td>
+                <td>{{ messageSend.status }}</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    <h1>Messages Received</h1>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Title</th>
+                <th>Content</th>
+                <th>Createdat</th>
+                <th>Status</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for messageReceiver in messagesReceiver %}
+            <tr>
+                <td><a href="{{ path('message_show', { 'id': messageReceiver.id }) }}">{{ messageReceiver.title }}</a></td>
+                <td>{{ messageReceiver.content }}</td>
+                <td>{% if messageReceiver.createdAt %}{{ messageReceiver.createdAt|date('Y-m-d H:i:s') }}{% endif %}</td>
+                <td>{{ messageReceiver.status }}</td>
             </tr>
         {% endfor %}
         </tbody>
