@@ -3,6 +3,7 @@
 namespace AppBundle\Controller;
 
 use AppBundle\Entity\Message;
+use AppBundle\Entity\Offer;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
@@ -39,18 +40,24 @@ class MessageController extends Controller
     /**
      * Creates a new message entity.
      *
-     * @Route("/new", name="message_new")
+     * @Route("/new/{id}", name="message_new")
      * @Method({"GET", "POST"})
      */
-    public function newAction(Request $request)
+    public function newAction($id,  Request $request)
     {
+        $receiverId = $id;
         $user = $this->getUser();
+        $senderId = $this->getUser()->getId();
         $message = new Message();
         $form = $this->createForm('AppBundle\Form\MessageType', $message);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();
+            $message->setCreatedAt(new \DateTime());
+            $message->setStatus('0');
+            $message->setSender($senderId);
+            $message->setReceiver($receiverId);
             $em->persist($message);
             $em->flush();
 

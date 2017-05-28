@@ -18,6 +18,7 @@ addBox - Notice-board
     - offer
     - comment
     - category 
+    - message
 - all users can see up-to-date advertisements on main page
 - all users can view ads and add comments 
 - to add new advertisment, user must to register
@@ -29,6 +30,7 @@ addBox - Notice-board
 - if someone adds a comment the owner of the offer gets an email with the content, date and a link to check
 - offer have to add to one category  
 - category can create only promoted user to admin role
+- logged in users can send message to offer owner user
 
 ### Routing:
 - /  - all user
@@ -39,6 +41,7 @@ addBox - Notice-board
 - /profile/offer/ - only logged in users
 - /category/{id} - all users
 - /category/new - only admin
+- /profile/message - only logged in users
 ### Author
 
 * **Łukasz Materla** - [Profile](https://github.com/lukaszmaterla)

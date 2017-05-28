@@ -19,7 +19,7 @@
         </tr>
         <tr>
             <th>User</th>
-            <td>{{ offer.user.username }}</td>
+            <td>{{ offer.user.username }} <span><a href="{{ path('message_new', {'id': offer.user.id}) }}">Contact</a></span></td>
         </tr>
         <tr>
             <th>Price</th>
