@@ -34,10 +34,11 @@ class Category
      * @ORM\OneToMany(targetEntity="AppBundle\Entity\Offer", mappedBy="category")
      */
     private $offers;
+
     /**
      * Get id
      *
-     * @return integer 
+     * @return integer
      */
     public function getId()
     {
@@ -60,12 +61,13 @@ class Category
     /**
      * Get name
      *
-     * @return string 
+     * @return string
      */
     public function getName()
     {
         return $this->name;
     }
+
     /**
      * Constructor
      */
@@ -100,13 +102,15 @@ class Category
     /**
      * Get offers
      *
-     * @return \Doctrine\Common\Collections\Collection 
+     * @return \Doctrine\Common\Collections\Collection
      */
     public function getOffers()
     {
         return $this->offers;
     }
-    public function __toString() {
+
+    public function __toString()
+    {
         return $this->name;
     }
 }

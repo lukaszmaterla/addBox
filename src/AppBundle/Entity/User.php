@@ -51,11 +51,22 @@ class User extends BaseUser
      */
     private $offers;
 
+    /**
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Message", mappedBy="sender")
+     */
+    private $sentMessages;
+    /**
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Message", mappedBy="receiver")
+     */
+    private $receivedMessages;
 
     public function __construct()
     {
         parent::__construct();
         $this->offers = new ArrayCollection();
+        $this->sentMessages = new ArrayCollection();
+        $this->receivedMessages = new ArrayCollection();
+
     }
 
     /**
@@ -184,5 +195,71 @@ class User extends BaseUser
     public function getPhoneNumber()
     {
         return $this->phoneNumber;
+    }
+
+    /**
+     * Add sentMessages
+     *
+     * @param \AppBundle\Entity\Message $sentMessages
+     * @return User
+     */
+    public function addSentMessage(\AppBundle\Entity\Message $sentMessages)
+    {
+        $this->sentMessages[] = $sentMessages;
+
+        return $this;
+    }
+
+    /**
+     * Remove sentMessages
+     *
+     * @param \AppBundle\Entity\Message $sentMessages
+     */
+    public function removeSentMessage(\AppBundle\Entity\Message $sentMessages)
+    {
+        $this->sentMessages->removeElement($sentMessages);
+    }
+
+    /**
+     * Get sentMessages
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getSentMessages()
+    {
+        return $this->sentMessages;
+    }
+
+    /**
+     * Add receivedMessages
+     *
+     * @param \AppBundle\Entity\Message $receivedMessages
+     * @return User
+     */
+    public function addReceivedMessage(\AppBundle\Entity\Message $receivedMessages)
+    {
+        $this->receivedMessages[] = $receivedMessages;
+
+        return $this;
+    }
+
+    /**
+     * Remove receivedMessages
+     *
+     * @param \AppBundle\Entity\Message $receivedMessages
+     */
+    public function removeReceivedMessage(\AppBundle\Entity\Message $receivedMessages)
+    {
+        $this->receivedMessages->removeElement($receivedMessages);
+    }
+
+    /**
+     * Get receivedMessages
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getReceivedMessages()
+    {
+        return $this->receivedMessages;
     }
 }

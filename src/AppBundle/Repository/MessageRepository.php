@@ -13,21 +13,21 @@ use Doctrine\ORM\EntityRepository;
  */
 class MessageRepository extends EntityRepository
 {
-    public function findyAllSendMessageByLoggedUser($id)
+    public function findyAllSendMessageByLoggedUser($userSend)
     {
         return $this->getEntityManager()
             ->createQuery('SELECT m FROM AppBundle:Message m 
-            WHERE m.sender = :id ORDER BY m.createdAt DESC')
-            ->setParameter('id', $id)
+            WHERE m.sender = :userSend ORDER BY m.createdAt DESC')
+            ->setParameter('userSend', $userSend)
             ->getResult();
     }
 
-    public function findAllReceiveredMessageByLoggedUser($id)
+    public function findAllReceiveredMessageByLoggedUser($userReceived)
     {
         return $this->getEntityManager()
             ->createQuery('SELECT m FROM AppBundle:Message m 
-            WHERE m.receiver = :id ORDER BY m.createdAt DESC')
-            ->setParameter('id', $id)
+            WHERE m.receiver = :userReceived ORDER BY m.createdAt DESC')
+            ->setParameter('userReceived', $userReceived)
             ->getResult();
 
     }

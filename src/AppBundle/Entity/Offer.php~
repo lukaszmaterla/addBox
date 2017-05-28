@@ -66,12 +66,13 @@ class Offer
     /**
      * Get id
      *
-     * @return integer 
+     * @return integer
      */
     /**
      * @ORM\OneToMany(targetEntity="AppBundle\Entity\Comment", mappedBy="offer")
      */
     private $comments;
+
     public function getId()
     {
         return $this->id;
@@ -93,7 +94,7 @@ class Offer
     /**
      * Get title
      *
-     * @return string 
+     * @return string
      */
     public function getTitle()
     {
@@ -116,7 +117,7 @@ class Offer
     /**
      * Get description
      *
-     * @return string 
+     * @return string
      */
     public function getDescription()
     {
@@ -129,9 +130,9 @@ class Offer
      * @param \DateTime $expiredAt
      * @return Offer
      */
-    public function setExpiredAt($expiredAt)
+    public function setExpiredAt()
     {
-        $this->expiredAt = $expiredAt;
+        $this->expiredAt = new \DateTime();
 
         return $this;
     }
@@ -139,7 +140,7 @@ class Offer
     /**
      * Get expiredAt
      *
-     * @return \DateTime 
+     * @return \DateTime
      */
     public function getExpiredAt()
     {
@@ -162,7 +163,7 @@ class Offer
     /**
      * Get user
      *
-     * @return \AppBundle\Entity\User 
+     * @return \AppBundle\Entity\User
      */
     public function getUser()
     {
@@ -186,14 +187,15 @@ class Offer
     /**
      * Get category
      *
-     * @return \AppBundle\Entity\Category 
+     * @return \AppBundle\Entity\Category
      */
     public function getCategory()
     {
         return $this->category;
     }
 
-    public function __toString() {
+    public function __toString()
+    {
         return $this->title;
     }
 
@@ -213,12 +215,13 @@ class Offer
     /**
      * Get price
      *
-     * @return string 
+     * @return string
      */
     public function getPrice()
     {
         return $this->price;
     }
+
     /**
      * Constructor
      */
@@ -253,7 +256,7 @@ class Offer
     /**
      * Get comments
      *
-     * @return \Doctrine\Common\Collections\Collection 
+     * @return \Doctrine\Common\Collections\Collection
      */
     public function getComments()
     {

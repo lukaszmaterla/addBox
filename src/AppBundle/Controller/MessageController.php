@@ -26,10 +26,10 @@ class MessageController extends Controller
      */
     public function indexAction()
     {
-        $userId =  $this->getUser()->getId();
+        //$userId =  $this->getUser()->getId();
         $user = $this->getUser();
-        $messagesSend = $this->getDoctrine()->getRepository('AppBundle:Message')->findyAllSendMessageByLoggedUser($userId);
-        $messagesReceiver = $this->getDoctrine()->getRepository('AppBundle:Message')->findAllReceiveredMessageByLoggedUser($userId);
+        $messagesSend = $this->getDoctrine()->getRepository('AppBundle:Message')->findyAllSendMessageByLoggedUser($user);
+        $messagesReceiver = $this->getDoctrine()->getRepository('AppBundle:Message')->findAllReceiveredMessageByLoggedUser($user);
         return $this->render('message/index.html.twig', array(
             'messagesSend' => $messagesSend,
             'messagesReceiver' => $messagesReceiver,
@@ -45,9 +45,8 @@ class MessageController extends Controller
      */
     public function newAction($id,  Request $request)
     {
-        $receiverId = $id;
+        $receiverId = $this->getDoctrine()->getRepository('AppBundle:User')->find($id);
         $user = $this->getUser();
-        $senderId = $this->getUser()->getId();
         $message = new Message();
         $form = $this->createForm('AppBundle\Form\MessageType', $message);
         $form->handleRequest($request);
@@ -56,7 +55,7 @@ class MessageController extends Controller
             $em = $this->getDoctrine()->getManager();
             $message->setCreatedAt(new \DateTime());
             $message->setStatus('0');
-            $message->setSender($senderId);
+            $message->setSender($user);
             $message->setReceiver($receiverId);
             $em->persist($message);
             $em->flush();

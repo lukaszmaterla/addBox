@@ -50,14 +50,18 @@ class Message
     private $status;
 
     /**
+     * @var string
+     *
+     * @ORM\Column(name="sender", type="string", length=255)
      * @ORM\ManyToOne(targetEntity="AppBundle\Entity\User", inversedBy="sentMessages")
-     * @ORM\JoinColumn(name="sender", referencedColumnName="id", nullable=true)
      */
     private $sender;
 
     /**
+     * @var string
+     *
+     * @ORM\Column(name="receiver", type="string", length=255)
      * @ORM\ManyToOne(targetEntity="AppBundle\Entity\User", inversedBy="receivedMessages")
-     * @ORM\JoinColumn(name="receiver", referencedColumnName="id", nullable=true)
      */
     private $receiver;
 
