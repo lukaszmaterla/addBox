@@ -51,13 +51,13 @@ class Message
 
     /**
      * @ORM\ManyToOne(targetEntity="AppBundle\Entity\User", inversedBy="sentMessages")
-     * @ORM\JoinColumn(name="sender", referencedColumnName="id", nullable=true)
+     * @ORM\JoinColumn(name="sender", referencedColumnName="id")
      */
     private $sender;
 
     /**
      * @ORM\ManyToOne(targetEntity="AppBundle\Entity\User", inversedBy="receivedMessages")
-     * @ORM\JoinColumn(name="receiver", referencedColumnName="id", nullable=true)
+     * @ORM\JoinColumn(name="receiver", referencedColumnName="id")
      */
     private $receiver;
 

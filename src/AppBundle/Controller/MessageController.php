@@ -81,6 +81,10 @@ class MessageController extends Controller
         $user = $this->getUser();
         $deleteForm = $this->createDeleteForm($message);
 
+        $em = $this->getDoctrine()->getManager();
+        $message->setStatus('1');
+        $em->persist($message);
+        $em->flush();
         return $this->render('message/show.html.twig', array(
             'message' => $message,
             'delete_form' => $deleteForm->createView(),
