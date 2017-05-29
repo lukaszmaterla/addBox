@@ -43,9 +43,9 @@ class Message
     private $createdAt;
 
     /**
-     * @var string
+     * @var integer
      *
-     * @ORM\Column(name="status", type="string", length=255)
+     * @ORM\Column(name="status", type="integer")
      */
     private $status;
 
